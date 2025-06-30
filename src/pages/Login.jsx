@@ -88,6 +88,7 @@ const Login = () => {
       };
       
       const response = await axios.post(`${backendUrl}api/users/login`, loginData);
+      console.log(response);
       
       if (response.data.success) {
         setSubmitMessage({ 
