@@ -88,7 +88,7 @@ const Login = () => {
       };
       
       const response = await axios.post(`${backendUrl}api/users/login`, loginData);
-      console.log("url is the", `${backendUrl}api/users/login`);
+      console.log("url ", `${backendUrl}api/users/login`);
       console.log(response);
       
       if (response.data.success) {
