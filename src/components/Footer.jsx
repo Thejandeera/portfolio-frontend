@@ -28,7 +28,7 @@ const Footer = () => {
             <h3 className="text-lg font-semibold text-gray-900 mb-4">About Rareblocks</h3>
             <p className="text-gray-600 text-sm leading-relaxed mb-6">
               Reliable portfolio publishing, worldwide. Seamless creation, 
-              instant access, and trusted performance—your work, our 
+              instant access, and trusted performance your work, our 
               priority.
             </p>
             
