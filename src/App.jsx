@@ -14,6 +14,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import PublicProfile from './pages/PublicProfile';
 import Footer from './components/Footer';
+import About from './pages/About';
 
 const App = () => {
 
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={isLoggedIn() ? <Profile /> : <SignInFirst />} />
+        <Route path="/about" element={<About />} />
 
         {/* Add validation in PublicProfile or move it after the 404 */}
         

@@ -79,7 +79,7 @@ const Profile = () => {
         if (!userId) return;
 
         try {
-            const response = await axios.get(`${backendUrl}api/user-profile/${userId}`);
+            const response = await axios.get(`${backendUrl}/api/user-profile/${userId}`);
             const data = response.data.data;
 
             // Update user info
@@ -129,7 +129,7 @@ const Profile = () => {
     const handleProjectUpdate = useCallback(async (projectId, formData) => {
         try {
             const response = await axios.put(
-                `${backendUrl}api/projects/${projectId}`,
+                `${backendUrl}/api/projects/${projectId}`,
                 formData,
                 {
                     headers: {
@@ -173,7 +173,7 @@ const Profile = () => {
                 formData.append('image', tempImage);
 
                 const updateResponse = await axios.put(
-                    `${backendUrl}api/users/${userId}`,
+                    `${backendUrl}/api/users/${userId}`,
                     formData,
                     {
                         headers: {
@@ -186,7 +186,7 @@ const Profile = () => {
             } else {
                 // If no new image, use JSON endpoint
                 const updateResponse = await axios.put(
-                    `${backendUrl}api/users/json/${userId}`,
+                    `${backendUrl}/api/users/json/${userId}`,
                     updatedUserData
                 );
                 updatedUser = updateResponse.data;
@@ -216,7 +216,7 @@ const Profile = () => {
         try {
             console.log("Submitting form data:", formData); // Debug log
 
-            const response = await axios.post(`${backendUrl}api/projects`, formData, {
+            const response = await axios.post(`${backendUrl}/api/projects`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -233,7 +233,7 @@ const Profile = () => {
 
     const handleEducationSubmit = useCallback(async (formData) => {
         try {
-            const response = await axios.post(`${backendUrl}api/education`, {
+            const response = await axios.post(`${backendUrl}/api/education`, {
                 institutionName: formData.schoolName,
                 endDate: formData.endDate,
                 userId: userId
@@ -249,7 +249,7 @@ const Profile = () => {
     
     const handleExtraSubmit = useCallback(async (formData) => {
         try {
-            const response = await axios.post(`${backendUrl}api/extra-activities`, {
+            const response = await axios.post(`${backendUrl}/api/extra-activities`, {
                 name: formData.activity,
                 institutionName: formData.institutionName,
                 userId: userId
@@ -269,7 +269,7 @@ const Profile = () => {
             if (socialMedia.length > 0) {
                 // Update existing social media
                 response = await axios.put(
-                    `${backendUrl}api/social-media/${socialMedia[0].id}`,
+                    `${backendUrl}/api/social-media/${socialMedia[0].id}`,
                     {
                         linkedInLink: formData.linkedin || '',
                         gitHubLink: formData.github || '',
@@ -279,7 +279,7 @@ const Profile = () => {
                 );
             } else {
                 // Create new social media
-                response = await axios.post(`${backendUrl}api/social-media`, {
+                response = await axios.post(`${backendUrl}/api/social-media`, {
                     linkedInLink: formData.linkedin || '',
                     gitHubLink: formData.github || '',
                     otherLink: formData.website || '',
@@ -297,7 +297,7 @@ const Profile = () => {
 
     const removeProject = useCallback(async (id) => {
         try {
-            await axios.delete(`${backendUrl}api/projects/${id}`);
+            await axios.delete(`${backendUrl}/api/projects/${id}`);
             setProjects(prev => prev.filter(project => project.id !== id));
             alert('Project deleted successfully!');
         } catch (error) {
@@ -308,7 +308,7 @@ const Profile = () => {
 
     const removeEducation = useCallback(async (id) => {
         try {
-            await axios.delete(`${backendUrl}api/education/${id}`);
+            await axios.delete(`${backendUrl}/api/education/${id}`);
             setEducation(prev => prev.filter(edu => edu.id !== id));
             alert('Education deleted successfully!');
         } catch (error) {
@@ -319,7 +319,7 @@ const Profile = () => {
 
     const removeExtraCurricular = useCallback(async (id) => {
         try {
-            await axios.delete(`${backendUrl}api/extra-activities/${id}`);
+            await axios.delete(`${backendUrl}/api/extra-activities/${id}`);
             setExtraCurricular(prev => prev.filter(extra => extra.id !== id));
             alert('Extra curricular activity deleted successfully!');
         } catch (error) {
@@ -349,7 +349,7 @@ const Profile = () => {
             }
 
             const response = await axios.put(
-                `${backendUrl}api/social-media/${currentData.id}`,
+                `${backendUrl}/api/social-media/${currentData.id}`,
                 payload,
                 {
                     headers: {

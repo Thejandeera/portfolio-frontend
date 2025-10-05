@@ -42,7 +42,7 @@ const PublicProfile = () => {
         const fetchUserProfile = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`${backendUrl}api/user-profile/full/by-username/${userName}`);
+                const response = await axios.get(`${backendUrl}/api/user-profile/full/by-username/${userName}`);
 
                 if (response.data.success && response.data.data) {
                     const data = response.data.data;

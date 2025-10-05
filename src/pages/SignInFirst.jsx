@@ -111,7 +111,7 @@ const SignInFirst = () => {
 
           <div className="mt-4 sm:mt-6 text-xs sm:text-sm text-gray-500">
             Don't have an account?{' '}
-            <a href="/register" className="text-black font-medium hover:underline">Sign up</a>
+            <a href="/signup" className="text-black font-medium hover:underline">Sign up</a>
           </div>
         </div>
       </div>

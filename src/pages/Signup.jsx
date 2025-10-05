@@ -187,7 +187,7 @@ const Signup = () => {
         formDataToSend.append('image', blob, 'profile.jpg');
       }
       
-      const response = await axios.post(`${backendUrl}api/users`, formDataToSend, {
+      const response = await axios.post(`${backendUrl}/api/users`, formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

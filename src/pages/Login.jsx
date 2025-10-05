@@ -87,8 +87,8 @@ const Login = () => {
         password: formData.password
       };
       
-      const response = await axios.post(`${backendUrl}api/users/login`, loginData);
-      console.log("url ", `${backendUrl}api/users/login`);
+      const response = await axios.post(`${backendUrl}/api/users/login`, loginData);
+      console.log("url ", `${backendUrl}/api/users/login`);
       console.log(response);
       
       if (response.data.success) {

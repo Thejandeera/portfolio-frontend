@@ -28,7 +28,7 @@ const ExtraModal = ({ isOpen, onClose, onSubmit }) => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `${backendUrl}api/education/user/${userId}/institutions`
+        `${backendUrl}/api/education/user/${userId}/institutions`
       );
       
       // Parse the response data properly

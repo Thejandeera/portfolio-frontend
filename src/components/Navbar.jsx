@@ -9,11 +9,13 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     const handleConnectClick = () => {
-        if (userData) {
-            sessionStorage.removeItem('userData');
-            setUserData(null);
-        }
         navigate("/signup");
+    };
+
+    const handleLogoutClick = () => {
+        sessionStorage.removeItem('userData');
+        setUserData(null);
+        navigate("/");
     };
 
     useEffect(() => {
@@ -49,7 +51,7 @@ const Navbar = () => {
                     <img
                         src="/blacklogo.png"
                         alt="Logo"
-                        className="w-10 h-10 sm:w-12 sm:h-12 md:w-[60px] md:h-[60px]"
+                        className="w-10 h-10 sm:w-12 sm:h-12 md:w-[60px] md:h-[60px] flex-shrink-0"
                     />
                     <a href="home" className="text-base sm:text-lg md:text-xl font-semibold text-black">
                         FolioCraft
@@ -97,11 +99,20 @@ const Navbar = () => {
                     >
                         My Profile
                     </a>
+                    <a
+                        href="settings"
+                        className="relative text-black transition-colors duration-200 hover:text-gray-500
+             after:content-[''] after:absolute after:left-0 after:-bottom-1
+             after:h-[2px] after:w-0 after:bg-gray-500
+             after:transition-all after:duration-300 hover:after:w-full"
+                    >
+                        Settings
+                    </a>
                 </div>
 
                 {/* Right side - User Info or Connect Button */}
                 <div className="hidden sm:flex items-center space-x-2 md:space-x-3">
-                    {userData && (
+                    {userData ? (
                         <>
                             <div className="text-right">
                                 <div className="text-sm text-black">Welcome</div>
@@ -112,16 +123,23 @@ const Navbar = () => {
                             <img
                                 src={userData.image}
                                 alt="User"
-                                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-gray-600 object-cover"
+                                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-gray-600 object-cover flex-shrink-0"
                             />
+                            <button
+                                onClick={handleLogoutClick}
+                                className="bg-red-400 text-white px-3 py-1 sm:px-4 sm:py-1.5 md:px-6 md:py-2 rounded-full font-medium text-xs sm:text-sm md:text-base transition-all duration-300 hover:bg-red-700 hover:scale-105 hover:shadow-lg cursor-pointer "
+                            >
+                                Logout
+                            </button>
                         </>
+                    ) : (
+                        <button
+                            onClick={handleConnectClick}
+                            className="bg-black text-white px-3 py-1 sm:px-4 sm:py-1.5 md:px-6 md:py-2 rounded-full font-medium text-xs sm:text-sm md:text-base transition-all duration-300 hover:bg-gray-800 hover:scale-105 hover:shadow-lg"
+                        >
+                            Connect with us
+                        </button>
                     )}
-                    <button
-                        onClick={handleConnectClick}
-                        className="bg-black text-white px-3 py-1 sm:px-4 sm:py-1.5 md:px-6 md:py-2 rounded-full font-medium text-xs sm:text-sm md:text-base transition-all duration-300 hover:bg-gray-800 hover:scale-105 hover:shadow-lg"
-                    >
-                        Connect with us
-                    </button>
                 </div>
 
                 {/* Mobile Menu */}
@@ -149,12 +167,19 @@ const Navbar = () => {
                             >
                                 My Profile
                             </a>
+                            <a
+                                href="settings"
+                                className="text-black py-2 border-b border-gray-200"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Settings
+                            </a>
                             {userData && (
-                                <div className="flex items-center space-x-3 pt-2">
+                                <div className="flex items-center space-x-3 pt-2 pb-2 border-b border-gray-200">
                                     <img
                                         src={userData.image}
                                         alt="User"
-                                        className="w-10 h-10 rounded-full border-2 border-gray-600 object-cover"
+                                        className="w-10 h-10 rounded-full border-2 border-gray-600 object-cover flex-shrink-0"
                                     />
                                     <div>
                                         <div className="text-sm text-black">Welcome</div>
@@ -164,15 +189,27 @@ const Navbar = () => {
                                     </div>
                                 </div>
                             )}
-                            <button
-                                onClick={() => {
-                                    handleConnectClick();
-                                    setIsMobileMenuOpen(false);
-                                }}
-                                className="w-full mt-3 bg-black text-white px-4 py-2 rounded-full font-medium text-xs sm:text-sm transition-all duration-300 hover:bg-gray-800 hover:scale-105"
-                            >
-                                Connect with us
-                            </button>
+                            {userData ? (
+                                <button
+                                    onClick={() => {
+                                        handleLogoutClick();
+                                        setIsMobileMenuOpen(false);
+                                    }}
+                                    className="w-full mt-3 bg-red-600 text-white px-4 py-2 rounded-full font-medium text-xs sm:text-sm transition-all duration-300 hover:bg-red-700"
+                                >
+                                    Logout
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={() => {
+                                        handleConnectClick();
+                                        setIsMobileMenuOpen(false);
+                                    }}
+                                    className="w-full mt-3 bg-black text-white px-4 py-2 rounded-full font-medium text-xs sm:text-sm transition-all duration-300 hover:bg-gray-800"
+                                >
+                                    Connect with us
+                                </button>
+                            )}
                         </div>
                     </div>
                 )}
