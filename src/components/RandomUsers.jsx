@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { FaUser, FaBriefcase, FaUniversity, FaEye } from 'react-icons/fa';
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
@@ -15,12 +16,15 @@ const RandomUsers = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         setLoading(true);
         const response = await fetch(`${backendUrl}/api/users`);
+
+        console.log('Fetch response:', response);
         if (!response.ok) throw new Error('Failed to fetch users');
         const data = await response.json();
         
@@ -31,7 +35,8 @@ const RandomUsers = () => {
           name: user.fullName,
           role: user.role,
           institution: user.institution,
-          image: user.image || "/man.jpg" // Fallback image if not provided
+          image: user.image || "/man.jpg", // Fallback image if not provided
+          userName: user.userName
         }));
         
         setUsers(selectedUsers);
@@ -45,28 +50,32 @@ const RandomUsers = () => {
             name: "Alex Rivera",
             role: "Full-Stack Developer",
             institution: "Tech University",
-            image: "/man.jpg"
+            image: "/man.jpg",
+            userName: "alexrivera"
           },
           {
             id: 2,
             name: "Jordan Lee",
             role: "UX/UI Designer",
             institution: "Design Academy",
-            image: "/man.jpg"
+            image: "/man.jpg",
+            userName: "jordanlee"
           },
           {
             id: 3,
             name: "Taylor Kim",
             role: "Data Scientist",
             institution: "Analytics Institute",
-            image: "/man.jpg"
+            image: "/man.jpg",
+            userName: "taylorkim"
           },
           {
             id: 4,
             name: "Casey Patel",
             role: "Product Manager",
             institution: "Business School",
-            image: "/man.jpg"
+            image: "/man.jpg",
+            userName: "caseypatel"
           }
         ]);
       } finally {
@@ -217,7 +226,10 @@ const RandomUsers = () => {
                 transition={{ delay: 0.3 }}
                 className="relative z-10 flex justify-center mt-6"
               >
-                <button className="group/btn flex items-center space-x-2 bg-white text-gray-800 px-6 py-3 rounded-2xl text-sm font-semibold border border-gray-300 hover:border-gray-400 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105">
+                <button 
+                  onClick={() => navigate(`/${user.userName}`)}
+                  className="group/btn flex items-center space-x-2 bg-white text-gray-800 px-6 py-3 rounded-2xl text-sm font-semibold border border-gray-300 hover:border-gray-400 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
+                >
                   <span>View Profile</span>
                   <FaEye className="text-xs group-hover/btn:translate-x-1 transition-transform duration-300" />
                 </button>

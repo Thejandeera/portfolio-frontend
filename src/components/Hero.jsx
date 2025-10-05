@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const navigate = useNavigate();
   
   const slides = [
     {
@@ -81,7 +83,7 @@ const Hero = () => {
               
               {/* CTA Buttons */}
               <div className="flex flex-col xs:flex-row gap-3 sm:gap-4">
-                <button className="group bg-black text-white px-4 py-2 xs:px-6 xs:py-3 sm:px-8 sm:py-4 rounded-full font-semibold text-sm xs:text-base sm:text-lg transition-all duration-300 hover:bg-gray-800 hover:scale-105 hover:shadow-xl">
+                <button onClick={() => navigate('/signup')} className="group bg-black text-white px-4 py-2 xs:px-6 xs:py-3 sm:px-8 sm:py-4 rounded-full font-semibold text-sm xs:text-base sm:text-lg transition-all duration-300 hover:bg-gray-800 hover:scale-105 hover:shadow-xl">
                   <span className="flex items-center justify-center gap-2">
                     Get Started Free
                     <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -89,8 +91,8 @@ const Hero = () => {
                     </svg>
                   </span>
                 </button>
-                <button className="border-2 border-gray-300 text-gray-700 px-4 py-2 xs:px-6 xs:py-3 sm:px-8 sm:py-4 rounded-full font-semibold text-sm xs:text-base sm:text-lg transition-all duration-300 hover:border-black hover:text-black hover:scale-105 hover:shadow-lg">
-                  View Examples
+                <button onClick={() => navigate('/login')} className="border-2 border-gray-300 text-gray-700 px-4 py-2 xs:px-6 xs:py-3 sm:px-8 sm:py-4 rounded-full font-semibold text-sm xs:text-base sm:text-lg transition-all duration-300 hover:border-black hover:text-black hover:scale-105 hover:shadow-lg">
+                  Login With Your Account
                 </button>
               </div>
               
